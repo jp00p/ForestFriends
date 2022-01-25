@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://weapons/PotatoShield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://graphics/characters/p1-walk-1.png" type="Texture" id=3]
+[ext_resource path="res://graphics/characters/p1-walk-3.png" type="Texture" id=4]
+[ext_resource path="res://graphics/characters/p1-walk-2.png" type="Texture" id=5]
+[ext_resource path="res://graphics/characters/p2-walk-1.png" type="Texture" id=6]
+[ext_resource path="res://graphics/characters/p2-walk-2.png" type="Texture" id=7]
+[ext_resource path="res://graphics/characters/p2-walk-3.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=5]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 16.2788
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 76.0066
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 31.0
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "p2_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "p1_walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0.678431, 0.0862745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.152941, 0.152941, 0.152941, 1 )
+
+[node name="Player" type="KinematicBody2D" groups=["players"]]
+collision_mask = 5
+script = ExtResource( 1 )
+starting_weapon = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 13 )
+shape = SubResource( 5 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource( 8 )
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="ItemMagnet" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemMagnet"]
+shape = SubResource( 2 )
+
+[node name="ItemPickup" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickup"]
+shape = SubResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -30.0
+margin_top = -41.0
+margin_right = 29.0
+margin_bottom = -27.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "p2_walk"
+frame = 1
+
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2( 0, 31 )
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -4.0
+margin_right = 24.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 48, 8 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
+value = 33.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IFrames" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_entered" from="ItemMagnet" to="." method="_on_ItemRange_area_entered"]
+[connection signal="area_entered" from="ItemPickup" to="." method="_on_ItemPickup_area_entered"]
+[connection signal="timeout" from="IFrames" to="." method="_on_IFrames_timeout"]
