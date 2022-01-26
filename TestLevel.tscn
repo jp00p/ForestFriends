@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TestLevel.gd" type="Script" id=2]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://graphics/world/grass/som_grass.png" type="Texture" id=4]
+[ext_resource path="res://spawners/TestSpawner2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://spawners/TestSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://weapons/PotatoShield.tscn" type="PackedScene" id=8]
 [ext_resource path="res://weapons/MagicWand.tscn" type="PackedScene" id=9]
 [ext_resource path="res://items/XPGem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://weapons/HoneydewShooter.tscn" type="PackedScene" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "som_grass.png 0"
@@ -35,7 +37,7 @@
 
 [node name="LevelBase" type="Node2D" groups=["level"]]
 script = ExtResource( 2 )
-wave_progression = [ ExtResource( 6 ) ]
+wave_progression = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 5 ) ]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -51,7 +53,7 @@ starting_weapon = ExtResource( 9 )
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 75, 0 )
 player_id = 2
-starting_weapon = ExtResource( 9 )
+starting_weapon = ExtResource( 11 )
 
 [node name="PotatoShield" parent="Player2/Weapons" index="0" instance=ExtResource( 8 )]
 

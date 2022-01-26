@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/DragonFruit.png-5c3826f90c05f0fd6ed9d088b29271d2.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://graphics/food/DragonFruit.png"
+dest_files=[ "res://.import/DragonFruit.png-5c3826f90c05f0fd6ed9d088b29271d2.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

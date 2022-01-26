@@ -2,8 +2,6 @@ extends Node2D
 
 export (Array, PackedScene) var wave_progression
 var current_wave = 0 setget set_wave
-var thread
-var spawn_thread
 
 var spawn_buffer_range = 200
 
@@ -49,7 +47,6 @@ func spawn_enemy(enemy, num_enemies, pattern):
 		
 		# TODO: add more patterns, maybe move this to spawner scene
 		var spawn_loc = randi()%4
-		print(spawn_loc)
 		match spawn_loc:
 			0: # top
 				spawn_location_x = rand_range($Camera.min_pos.x - spawn_buffer_range, $Camera.max_pos.x + spawn_buffer_range)

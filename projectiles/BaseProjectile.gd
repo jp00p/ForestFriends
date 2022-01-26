@@ -5,6 +5,7 @@ var speed = 100
 var damage = 1
 var knockback_vector = Vector2.ZERO
 var target = null
+var player = null
 export (bool) var passthrough = false # does it go thru enemies?
  
 func _on_BaseProjectile_body_entered(body):

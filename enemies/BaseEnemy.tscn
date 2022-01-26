@@ -1,23 +1,23 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://enemies/BaseEnemy.gd" type="Script" id=1]
-[ext_resource path="res://graphics/enemies/BatJ.png" type="Texture" id=2]
+[ext_resource path="res://graphics/enemies/BatO.png" type="Texture" id=2]
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -25,7 +25,7 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=8]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=11]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -52,8 +52,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 0.9 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "wobble"
+[sub_resource type="Animation" id=12]
 length = 3.0
 loop = true
 tracks/0/type = "value"
@@ -75,15 +74,13 @@ tracks/0/keys = {
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
-chase_speed = 80
-hp = 2
+chase_speed = 60
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 0, 0, 1 )
 rotation = -0.0872665
 scale = Vector2( 1, 0.9 )
-frames = SubResource( 7 )
-frame = 2
+frames = SubResource( 16 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -93,8 +90,8 @@ shape = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "wobble"
-anims/RESET = SubResource( 3 )
-anims/wobble = SubResource( 2 )
+anims/RESET = SubResource( 11 )
+anims/wobble = SubResource( 12 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2

@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Weapon
+
 export (String) var weapon_name = "BaseWeapon"
 export (float) var cooldown_speed = 2.5
 export (int) var projectile_speed = 200
@@ -8,17 +10,25 @@ export (int) var num_projectiles = 1
 export (PackedScene) var projectile = load("res://projectiles/BaseProjectile.tscn")
 signal create_projectile(p)
 onready var muzzle = $Muzzle
+var player = null
 
 func _ready():
+	player = get_parent().get_parent()
 	$Cooldown.wait_time = cooldown_speed
 	$Cooldown.start()
-	self.connect("create_projectile", owner, "create_projectile")
+	if player:
+		self.connect("create_projectile", player, "create_projectile")
 	
+func _process(delta):
+	$Label.text = str(player)
+
 func fire():
 	var p = projectile.instance()
 	p.speed = projectile_speed
 	p.damage = projectile_damage
-	p.global_position = owner.global_position
+	if player:
+		p.player = player
+		p.global_position = player.global_position
 	emit_signal("create_projectile", p)
 
 func _on_Cooldown_timeout():

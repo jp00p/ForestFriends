@@ -22,14 +22,14 @@ radius = 31.0
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "p2_walk",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "p1_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "p2_walk",
 "speed": 5.0
 } ]
 
