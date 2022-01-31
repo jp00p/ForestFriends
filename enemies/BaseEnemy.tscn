@@ -23,7 +23,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=17]
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -74,7 +74,8 @@ tracks/0/keys = {
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
-chase_speed = 60
+chase_speed = 20
+hp = 3
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 rotation = -0.0872665
@@ -84,12 +85,12 @@ frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 8 )
+rotation = 0.785398
+shape = SubResource( 17 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "wobble"
 anims/RESET = SubResource( 11 )
 anims/wobble = SubResource( 12 )
 

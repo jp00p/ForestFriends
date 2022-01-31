@@ -1,14 +1,15 @@
 extends "res://projectiles/BaseProjectile.gd"
 
 enum {IDLE, FLY, STICK}
-export (float) var acceleration = 0.1 * 60
-export (float) var throw_speed = 3.5 * 60
-export (float) var return_speed = 0.5 * 60
+var acceleration = 0.6
+var throw_speed = speed * 5
+var return_speed = throw_speed * 1.5
 onready var parent: = get_parent()
 var can_return: bool = true
 var state: int = IDLE
 var velocity: = Vector2.ZERO
 var pos: = Vector2.ZERO
+var point_to = Vector2.ZERO
 
 func _ready():
 	throw()
@@ -23,7 +24,7 @@ func _physics_process(delta):
 			stick()
 
 func idle():
-	look_at(get_global_mouse_position())
+	look_at(point_to)
 
 func fly(delta:float):
 	velocity += (get_target() - pos).normalized() * speed
@@ -46,7 +47,7 @@ func throw():
 	state = FLY
 	can_return = false
 	$FlyTimer.start()
-	velocity = (get_global_mouse_position() - global_position).normalized() * throw_speed
+	velocity = (point_to - global_position).normalized() * throw_speed
 	speed = acceleration
 	pos = global_position #variable for disconnecting from parent movement
 

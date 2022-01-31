@@ -140,6 +140,8 @@ p2_down={
 [physics]
 
 2d/physics_engine="GodotPhysics"
+3d/active_soft_world=false
+2d/cell_size=64
 
 [rendering]
 

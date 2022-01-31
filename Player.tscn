@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://weapons/PotatoShield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/Claw.tscn" type="PackedScene" id=2]
 [ext_resource path="res://graphics/characters/p1-walk-1.png" type="Texture" id=3]
 [ext_resource path="res://graphics/characters/p1-walk-3.png" type="Texture" id=4]
 [ext_resource path="res://graphics/characters/p1-walk-2.png" type="Texture" id=5]
@@ -56,6 +56,7 @@ collision_mask = 2
 shape = SubResource( 8 )
 
 [node name="Weapons" type="Node2D" parent="."]
+show_behind_parent = true
 
 [node name="ItemMagnet" type="Area2D" parent="."]
 collision_layer = 0
@@ -111,7 +112,12 @@ __meta__ = {
 wait_time = 0.2
 one_shot = true
 
+[node name="RegenTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="ItemMagnet" to="." method="_on_ItemRange_area_entered"]
 [connection signal="area_entered" from="ItemPickup" to="." method="_on_ItemPickup_area_entered"]
 [connection signal="timeout" from="IFrames" to="." method="_on_IFrames_timeout"]
+[connection signal="timeout" from="RegenTimer" to="." method="_on_RegenTimer_timeout"]

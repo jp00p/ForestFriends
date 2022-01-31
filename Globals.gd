@@ -25,3 +25,6 @@ func set_level(val):
 	self.next_level += round(next_level * log(next_level))
 	print(next_level)
 	emit_signal("level_changed", level, next_level)
+
+func pause_game(state):
+	get_tree().paused = state

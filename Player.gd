@@ -5,7 +5,7 @@ class_name Player
 export (int) var player_id = 1
 export (PackedScene) var starting_weapon
 
-var base_speed = 260
+var base_speed = 160
 var speed = base_speed
 var friction = 0.9
 var acceleration = 0.25
@@ -15,6 +15,9 @@ var camera = null
 var max_hp = 25 setget set_max_hp
 var hp = max_hp setget set_hp
 var iframes_active = false
+var regen_amt = 1
+var dead = false
+var direction = Vector2(-1, 0)
 
 onready var health_bar = $HealthBar/ProgressBar
 
@@ -23,7 +26,7 @@ func _ready():
 	self.hp = max_hp
 	if starting_weapon:
 		var w = starting_weapon.instance()
-		w.connect("create_projectile", self, "create_projectile")
+		#w.connect("create_projectile", self, "create_projectile")
 		$Weapons.add_child(w)
 	
 	var cameras = get_tree().get_nodes_in_group("camera")
@@ -36,13 +39,18 @@ func get_input():
 	if Input.is_action_pressed('p%s_right' % player_id):
 		input.x += 1
 		$AnimatedSprite.flip_h = true
+		direction.x = input.x
 	if Input.is_action_pressed('p%s_left' % player_id):
 		input.x -= 1
 		$AnimatedSprite.flip_h = false
+		direction.x = input.x
 	if Input.is_action_pressed('p%s_down' % player_id):
 		input.y += 1
+		
 	if Input.is_action_pressed('p%s_up' % player_id):
 		input.y -= 1
+		
+	
 	if input == Vector2.ZERO:
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 1
@@ -76,9 +84,11 @@ func _physics_process(delta):
 	for e in enemies:
 		take_damage(1)
 
-func create_projectile(p):
-	owner.call_deferred("add_child", p)
-
+func create_projectile(p,local=false):
+	if not local:
+		owner.call_deferred("add_child", p)
+	else:
+		call_deferred("add_child", p)
 
 func _on_ItemRange_area_entered(area):
 	if area is Item and not area.target:
@@ -115,3 +125,9 @@ func set_flash(val):
 	flash = val
 	if flash == 0:
 		$AnimatedSprite.modulate = Color.white
+
+func get_weapons():
+	return $Weapons.get_children()
+
+func _on_RegenTimer_timeout():
+	self.hp += regen_amt

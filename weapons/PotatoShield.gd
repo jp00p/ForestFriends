@@ -9,6 +9,7 @@ func fire():
 func _on_Cooldown_timeout():
 	if $Pivot/PotatoSpawn.get_child_count() < 1:
 		var p = projectile.instance()
+		p.player = player
 		p.pivot = $Pivot
 		$Pivot/PotatoSpawn.add_child(p)
 	

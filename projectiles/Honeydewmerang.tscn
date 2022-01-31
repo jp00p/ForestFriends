@@ -20,6 +20,7 @@ position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [node name="FlyTimer" type="Timer" parent="." index="2"]
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="FlyTimer" to="." method="_on_FlyTimer_timeout"]

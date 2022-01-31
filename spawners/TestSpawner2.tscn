@@ -5,6 +5,6 @@
 
 [node name="Spawner" instance=ExtResource( 1 )]
 total_enemies = 1000
-num_per_spawn = 50
+num_per_spawn = 25
 spawn_cooldown = 5
 enemy = ExtResource( 2 )

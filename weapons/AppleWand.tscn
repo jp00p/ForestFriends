@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://weapons/AppleWand.gd" type="Script" id=1]
+[ext_resource path="res://projectiles/Apple.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/BaseWeapon.tscn" type="PackedScene" id=3]
+
+[node name="AppleWand" instance=ExtResource( 3 )]
+script = ExtResource( 1 )
+cooldown_speed = 2.0
+projectile_speed = 300
+num_projectiles = 5
+description = "Your basic magic wand."
+projectile = ExtResource( 2 )

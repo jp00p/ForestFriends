@@ -32,10 +32,8 @@ animations = [ {
 } ]
 
 [node name="Frog" instance=ExtResource( 1 )]
-chase_speed = 50
-hp = 3
+chase_speed = 30
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 1, 1, 1, 1 )
 frames = SubResource( 6 )
-frame = 0
+frame = 4

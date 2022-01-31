@@ -12,9 +12,11 @@ func xp_changed(val):
 	
 func _process(delta):
 	$Count.text = "Enemies: %s" % get_tree().get_nodes_in_group("enemies").size()
-	$FPS.text = str(Engine.get_frames_per_second())
+	$FPS.text = "FPS: %s" % str(Engine.get_frames_per_second())
 
 func level_changed(val, next_level):
 	$XP/Margin/VBoxContainer/Label.text = "LEVEL: %s" % val
 	progress.min_value = progress.max_value
 	progress.max_value = next_level
+	# show level up screen
+	# Globals.pause_game(true)
